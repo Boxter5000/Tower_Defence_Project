@@ -9,20 +9,16 @@ public class TowerBase : MonoBehaviour
 
     public GameObject Bullet;
     public float BulletVelocity;
+    public float shootingRate;
 
     private Transform target;
     private Vector3 targetPos;
     private Vector3 thisPos;
     private float angle;
 
-    public bool InRange = false;
+    private bool InRange = false;
 
-    private void Start()
-    {
-        //find an enemy with the tag "Enenmy"
-        target = GameObject.FindGameObjectWithTag(Tag).GetComponent<Transform>();
-    }
-    void LateUpdate()
+    void Update()
     {
         //check if enemy is in Range
         if (InRange)
@@ -45,24 +41,32 @@ public class TowerBase : MonoBehaviour
         Debug.DrawLine(thisPos, target.position);
     }
 
+    //timer to controll the shoot rate
     IEnumerator shootTimer()
     {
-        for (int i = 0; InRange; i += i)
+        //while something is in range, shoot
+        while(InRange)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(shootingRate);
+            //cerate bullet
             InstantiateShoot();
         }
     }
 
     public void InstantiateShoot()
     {
+        //set direktion in witch the bullet needts to shoot
+        Vector3 VelovityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
+        //create a bullet
         GameObject BulletClone = Instantiate(Bullet, transform.position, Quaternion.identity);
-        BulletClone.GetComponent<Rigidbody2D>().velocity = new Vector3(targetPos.x, targetPos.y, 0) * BulletVelocity * Time.deltaTime;
-        Debug.Log("shoot");
+        //set the velocity of the bullet
+        BulletClone.GetComponent<Rigidbody2D>().velocity = VelovityDirection * BulletVelocity * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //get the possition of the collidet enemy
+        target = collision.transform;
         //Enemy is In Range
         InRange = true;
         StartCoroutine("shootTimer");
