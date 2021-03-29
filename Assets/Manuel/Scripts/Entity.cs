@@ -19,6 +19,8 @@ public class Entity : MonoBehaviour {
 	private float lastCheckpointReachedTime;
 	private Vector2 lastCheckpointPosition;
 
+	private Path currentPath;
+
 	protected void Awake() {
 		allEntities.AddLast(this);
 	}
@@ -34,7 +36,7 @@ public class Entity : MonoBehaviour {
 		transform.position = moveSpeedOverLocalProgress.Evaluate(localProgress) * (nextPosition - lastCheckpointPosition) + lastCheckpointPosition;
 
 
-		progress = (nextCheckpoint + localProgress) / Path.instance.GetWaypointAmount();
+		progress = (nextCheckpoint + localProgress) / currentPath.GetWaypointAmount();
 		if (localProgress >= 1f) {
 			InitalizeNextCheckpoint();
 		}
@@ -43,13 +45,13 @@ public class Entity : MonoBehaviour {
 	private void InitalizeNextCheckpoint() {
 		nextCheckpoint++;
 
-		if (nextCheckpoint >= Path.instance.GetWaypointAmount()) {
+		if (nextCheckpoint >= currentPath.GetWaypointAmount()) {
 			//nextCheckpoint = -1;
 			CompletedPath();
 			return;
 		}
 
-		nextPosition = Path.instance.GetPoint(nextCheckpoint);
+		nextPosition = currentPath.GetPoint(nextCheckpoint);
 
 		lerpSpeedMultiplier = ((Vector2)transform.position - nextPosition).magnitude / movementSpeed;
 		lastCheckpointReachedTime = Time.time;
@@ -74,5 +76,10 @@ public class Entity : MonoBehaviour {
 
 	public void OnDestroy() {
 		allEntities.Remove(this);
+	}
+
+	public void SetPath(Path path) {
+		currentPath = path;
+
 	}
 }
