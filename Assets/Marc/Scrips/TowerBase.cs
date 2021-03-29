@@ -10,36 +10,34 @@ public class TowerBase : MonoBehaviour
     public Bullet1 Bullet;
     public float BulletVelocity;
     public float shootingRate;
+    public float Range;
 
     private Transform target;
     private Vector3 targetPos;
     private Vector3 thisPos;
     private float angle;
     private bool CR_runing;
+    private CircleCollider2D CC2d;
 
     List<GameObject> EnemysList;
 
     private bool InRange = true;
 
-    private void Start()
+    private void Awake()
     {
         EnemysList = new List<GameObject>();
+        CC2d = GetComponent<CircleCollider2D>();
+        CC2d.radius = Range;
     }
-
 
     public void GetTargetPos()
     {
-        //get the positions of Tower and Enemy
         targetPos = EnemysList[0].transform.position;
         thisPos = transform.position;
 
-        //get distans betwene tower and Enemy
         targetPos = targetPos - thisPos;
-
         //calkulate the radius and the angel of the rotation
         angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-
-        //rotate the tower
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + offset));
         if (target != null)
         {
@@ -47,7 +45,6 @@ public class TowerBase : MonoBehaviour
         }
     }
     
-    //timer to controll the shoot rate
     IEnumerator shootTimer()
     {
         CR_runing = true;
@@ -56,20 +53,15 @@ public class TowerBase : MonoBehaviour
         {
             GetTargetPos();
             InstantiateShoot();
-            //cerate bullet
             yield return new WaitForSeconds(shootingRate);
-
         }
         CR_runing = false;
     }
 
     public void InstantiateShoot()
     {
-        //set direktion in witch the bullet needts to shoot
         Vector3 VelocityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
-        //create a bullet
         Bullet1 BulletClone = Instantiate(Bullet, transform.position, Quaternion.identity);
-        //set the velocity of the bullet
         BulletClone.GiveDirection(VelocityDirection, BulletVelocity);
     }
 
@@ -79,7 +71,6 @@ public class TowerBase : MonoBehaviour
         EnemysList.Add(currentEnemy);
         //get the possition of the collidet enemy
         target = collision.transform;
-        //Enemy is In Range
         if(!CR_runing)
         {
             StartCoroutine("shootTimer");

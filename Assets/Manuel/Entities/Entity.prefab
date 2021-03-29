@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3326832163047152170}
   - component: {fileID: 3326832163047152169}
   - component: {fileID: 628905823}
-  - component: {fileID: 1744758219}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -146,41 +145,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115cdf4671743f8438cc33d0982e64b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitPoints: 1000000
---- !u!114 &1744758219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326832163047152149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1224b9ef1f3565946956f4d4f112908d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 5
-  moveSpeedOverLocalProgress:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
