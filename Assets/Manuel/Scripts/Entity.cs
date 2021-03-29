@@ -20,8 +20,9 @@ public class Entity : MonoBehaviour {
 	private Vector2 lastCheckpointPosition;
 
 	private Path currentPath;
+    Spawner spawner;
 
-	protected void Awake() {
+    protected void Awake() {
 		allEntities.AddLast(this);
 	}
 
@@ -58,18 +59,12 @@ public class Entity : MonoBehaviour {
 		lastCheckpointPosition = transform.position;
 	}
 
-	public void Kill() {
-		KillImmediate();
-	}
-
-	public void KillImmediate() {
-		Destroy(gameObject);
-	}
-
 	public void CompletedPath() {
         Debug.Log("-1 live");
-		Kill();
-	}
+        spawner = transform.parent.GetComponent<Spawner>();
+        spawner.EnemyFuckingDied();
+        Destroy(gameObject);
+    }
 	public float GetProgress() {
 		return progress;
 	}

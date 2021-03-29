@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6548438223741994064}
   - component: {fileID: 6662461645438244790}
   - component: {fileID: 2034195109}
-  m_Layer: 0
+  - component: {fileID: 1416897241}
+  m_Layer: 6
   m_Name: Tower1
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -46,10 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tag: Enemy
-  offset: 0
-  Bullet: {fileID: 0}
-  BulletVelocity: 0
-  InRange: 0
+  offset: -90
+  Bullet: {fileID: 3020561799071204703, guid: 1c6c277686c3fd846acc8b757f210a4a, type: 3}
+  BulletVelocity: 1000
+  shootingRate: 2e-13
+  Range: 5
 --- !u!58 &2034195109
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -65,7 +67,23 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4.5
+  m_Radius: 4.49
+--- !u!58 &1416897241
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6057589643832243381}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.12027514}
+  serializedVersion: 2
+  m_Radius: 0.37972486
 --- !u!1 &7346417047368103499
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4770508842828533779}
   - component: {fileID: 1627886447423212334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

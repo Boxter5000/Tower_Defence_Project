@@ -7,6 +7,7 @@ public class Bullet1 : MonoBehaviour
     public float Countdown;
     Vector3 Direction = Vector3.zero;
     public float BulletVelocity = 0f;
+    public float Damage = 10f;
 
     Rigidbody2D rb2d;
 
