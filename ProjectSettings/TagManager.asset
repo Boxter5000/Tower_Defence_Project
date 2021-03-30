@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Tower
+  - SpawnPoint
+  - PathTemplate
+  - Path
   layers:
   - Default
   - TransparentFX
@@ -16,8 +19,8 @@ TagManager:
   - Tower
   - Bullet
   - Enemy
-  - 
-  - 
+  - Spawner
+  - Path
   - 
   - 
   - 
