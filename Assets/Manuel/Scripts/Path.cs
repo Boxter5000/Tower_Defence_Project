@@ -16,17 +16,17 @@ public class Path : MonoBehaviour
 	public void OnDrawGizmosSelected() {
 		for (int i = 0; i < wayPoints.Length; i++) {
 			Gizmos.color = Color.green;
-			Gizmos.DrawWireSphere(wayPoints[i], fieldSize / 2f);
+			Gizmos.DrawWireSphere(wayPoints[i] + (Vector2)transform.position, fieldSize / 2f);
 			if (i < wayPoints.Length - 1) {
 				Gizmos.color = Color.green;
-				Gizmos.DrawLine(wayPoints[i], wayPoints[i + 1]);
+				Gizmos.DrawLine(wayPoints[i] + (Vector2)transform.position, wayPoints[i + 1] + (Vector2)transform.position);
 			}
 		}
 	}
 
 	public Vector2 GetPoint(int index) {
 		if (index >= wayPoints.Length) throw new System.Exception("Out of Array Index!");
-		Circle c = new Circle(wayPoints[index], fieldSize);
+		Circle c = new Circle(wayPoints[index] + (Vector2)transform.position, fieldSize);
 		return c.GetRandomCoordinate();
 	}
 

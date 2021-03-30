@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour {
 
     private IEnumerator SpawnEnemy() {
         for (int t = 0; t < EnemysPerWave; t++) {
-                Entity newEnemy = Instantiate(enemyPrefab, transform);
+                Entity newEnemy = Instantiate(enemyPrefab, path.GetPoint(0), Quaternion.identity);
                 newEnemy.SetPath(path);
                 EnemysInScene++;
             for (float u = 0; u < TimeBetweneEnemySpawn; u += Time.deltaTime) {
