@@ -38,14 +38,14 @@ public class Spawner : MonoBehaviour {
 
     private IEnumerator SpawnEnemy() {
         for (int t = 0; t < EnemysPerWave; t++) {
-                Entity newEnemy = Instantiate(enemyPrefab, path.GetPoint(0), Quaternion.identity);
+                Entity newEnemy = Instantiate(enemyPrefab, path.GetPoint(0), Quaternion.identity, transform);
                 newEnemy.SetPath(path);
                 EnemysInScene++;
             for (float u = 0; u < TimeBetweneEnemySpawn; u += Time.deltaTime) {
                 yield return null;
             }
         }
-        EnemysPerWave += 10000;
+        EnemysPerWave += 10;
     }
 
     public void SetAutoStart()

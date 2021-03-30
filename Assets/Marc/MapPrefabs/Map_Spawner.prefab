@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4810888115662909873}
   - component: {fileID: 208851639950947927}
   - component: {fileID: 2399462828763575368}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Map_Spawner
   m_TagString: SpawnPoint
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}

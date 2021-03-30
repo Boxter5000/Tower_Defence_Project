@@ -9,6 +9,7 @@ TagManager:
   - SpawnPoint
   - PathTemplate
   - Path
+  - GridParant
   layers:
   - Default
   - TransparentFX
