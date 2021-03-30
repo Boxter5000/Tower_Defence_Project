@@ -13,12 +13,18 @@ public class PathSpawner : MonoBehaviour
     PathTemplates templates;
     private int rand;
     private bool Spawned = false;
-    public GameObject Path_Parent;
+    private GameObject Path_Parent;
 
     private void Awake()
     {
-        Invoke("Spawn", 2f);
+        //Invoke("Spawn", 2f);
         templates = GameObject.FindGameObjectWithTag("PathTemplate").GetComponent<PathTemplates>();
+        Path_Parent = GameObject.FindGameObjectWithTag("GridParant");
+    }
+
+    private void OnMouseDown()
+    {
+        Spawn();
     }
 
     void Spawn()
@@ -29,29 +35,25 @@ public class PathSpawner : MonoBehaviour
             {
                 //Needs opening to the bottom
                 rand = Random.Range(0, templates.bottomOpening.Length);
-                GameObject NewPath = Instantiate(templates.bottomOpening[rand], transform.position, Quaternion.identity);
-                NewPath.transform.parent = gameObject.transform;
+                Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
             }
             else if (OpeningDirection == 1)
             {
                 //Needs opening to the top
                 rand = Random.Range(0, templates.topOpening.Length);
-                GameObject NewPath = Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity);
-                NewPath.transform.parent = gameObject.transform;
+                Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
             }
             else if (OpeningDirection == 2)
             {
                 //Needs opening to the left
                 rand = Random.Range(0, templates.leftOpening.Length);
-                GameObject NewPath = Instantiate(templates.leftOpening[rand], transform.position, Quaternion.identity);
-                NewPath.transform.parent = gameObject.transform;
+                Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
             }
             else if (OpeningDirection == 3)
             {
                 //Needs opening to the right
                 rand = Random.Range(0, templates.rightOpening.Length);
-                GameObject NewPath = Instantiate(templates.rightOpening[rand], transform.position, Quaternion.identity);
-                NewPath.transform.SetParent(Path_Parent.transform);
+                Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
             }
             Spawned = true;
         }
