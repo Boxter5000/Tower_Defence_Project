@@ -58,17 +58,4 @@ public class PathSpawner : MonoBehaviour
             Spawned = true;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("SpawnPoint"))
-        {
-            if(!collision.GetComponent<PathSpawner>().Spawned && !Spawned)
-            {
-                Instantiate(templates.ClosedRome, transform.position, Quaternion.identity);
-                Destroy(gameObject);
-            }
-            Spawned = true;
-        }
-    }
 }
