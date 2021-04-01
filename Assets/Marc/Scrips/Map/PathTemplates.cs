@@ -9,5 +9,5 @@ public class PathTemplates : MonoBehaviour
     public GameObject[] leftOpening;
     public GameObject[] rightOpening;
 
-    public GameObject ClosedRome;
+    public GameObject PathBase;
 }

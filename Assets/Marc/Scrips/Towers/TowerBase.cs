@@ -11,6 +11,7 @@ public class TowerBase : MonoBehaviour
     public float BulletVelocity;
     public float shootingRate;
     public float Range;
+    public float TowerDamage;
 
     private Transform target;
     private Vector3 targetPos;
@@ -62,6 +63,7 @@ public class TowerBase : MonoBehaviour
     {
         Vector3 VelocityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
         Bullet1 BulletClone = Instantiate(Bullet, transform.position, Quaternion.identity);
+        BulletClone.Damage = TowerDamage;
         BulletClone.GiveDirection(VelocityDirection, BulletVelocity);
     }
 

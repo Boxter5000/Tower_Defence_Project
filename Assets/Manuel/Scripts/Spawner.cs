@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour {
                 yield return null;
             }
         }
-        EnemysPerWave += 10;
+        EnemysPerWave += 10000;
     }
 
     public void SetAutoStart()

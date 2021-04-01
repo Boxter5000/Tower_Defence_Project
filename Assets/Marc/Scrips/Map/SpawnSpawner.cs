@@ -13,11 +13,14 @@ public class SpawnSpawner : MonoBehaviour {
 
     [SerializeField] private GameObject spawnPrefab;
 
+    private int OpeningDir;
+
     private void Awake() {
         for(int i = 0; i < spawnPositions.Length; i++) {
             Collider2D coll = Physics2D.OverlapBox(spawnPositions[i], Vector2.one, 0.0f);
             if(coll != null) {
-                Instantiate(spawnPrefab, (Vector2)transform.position + spawnPositions[i], Quaternion.identity, transform);
+                GameObject NewSpawner = Instantiate(spawnPrefab, (Vector2)transform.position + spawnPositions[i], Quaternion.identity, transform);
+                NewSpawner.GetComponent<PathSpawner>().OpeningDirection = i;
             }
         }
     }
