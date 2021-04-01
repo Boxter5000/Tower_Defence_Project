@@ -32,11 +32,12 @@ public class PathSpawner : MonoBehaviour
     {
         if (!Spawned)
         {
+            Debug.Log(OpeningDirection);
             if(OpeningDirection == 0)
             {
                 //Needs opening to the bottom
                 rand = Random.Range(0, templates.bottomOpening.Length);
-                GameObject Path = Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                GameObject Path = Instantiate(templates.bottomOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
 
                 GameObject PathBranch = transform.parent.transform.Find("Path_T").gameObject;
                 PathBranch.SetActive(true);
@@ -60,7 +61,7 @@ public class PathSpawner : MonoBehaviour
             {
                 //Needs opening to the left
                 rand = Random.Range(0, templates.leftOpening.Length);
-                GameObject Path = Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                GameObject Path = Instantiate(templates.leftOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
 
                 GameObject PathBranch = transform.parent.transform.Find("Path_R").gameObject;
                 PathBranch.SetActive(true);
@@ -72,7 +73,7 @@ public class PathSpawner : MonoBehaviour
             {
                 //Needs opening to the right
                 rand = Random.Range(0, templates.rightOpening.Length);
-                GameObject Path = Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                GameObject Path = Instantiate(templates.rightOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
 
                 GameObject PathBranch = transform.parent.transform.Find("Path_L").gameObject;
                 PathBranch.SetActive(true);
