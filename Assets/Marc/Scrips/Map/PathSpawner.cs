@@ -32,18 +32,21 @@ public class PathSpawner : MonoBehaviour
     {
         if (!Spawned)
         {
-            Debug.Log(OpeningDirection);
-            if(OpeningDirection == 0)
+            Instantiate(templates.PathBase, transform.position, Quaternion.identity, Path_Parent.transform);
+            if (OpeningDirection == 0)
             {
                 //Needs opening to the bottom
                 rand = Random.Range(0, templates.bottomOpening.Length);
                 GameObject Path = Instantiate(templates.bottomOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
 
-                GameObject PathBranch = transform.parent.transform.Find("Path_T").gameObject;
-                PathBranch.SetActive(true);
+                if(transform.parent.Find("Path_T").gameObject != null)
+                {
+                    GameObject PathBranch = transform.parent.Find("Path_T").gameObject;
+                    PathBranch.SetActive(true);
+                    GameObject PathReciever = Path.transform.Find("Path_B").gameObject;
+                    PathReciever.SetActive(true);
+                }
 
-                GameObject PathReciever = Path.transform.Find("Path_B").gameObject;
-                PathReciever.SetActive(true);
             }
             else if (OpeningDirection == 1)
             {
@@ -51,11 +54,14 @@ public class PathSpawner : MonoBehaviour
                 rand = Random.Range(0, templates.topOpening.Length);
                 GameObject Path = Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
 
-                GameObject PathBranch = transform.parent.transform.Find("Path_B").gameObject;
-                PathBranch.SetActive(true);
+                if(transform.parent.Find("Path_B").gameObject != null)
+                {
+                    GameObject PathBranch = transform.parent.Find("Path_B").gameObject;
+                    PathBranch.SetActive(true);
+                    GameObject PathReciever = Path.transform.Find("Path_T").gameObject;
+                    PathReciever.SetActive(true);
+                }
 
-                GameObject PathReciever = Path.transform.Find("Path_T").gameObject;
-                PathReciever.SetActive(true);
             }
             else if (OpeningDirection == 2)
             {
@@ -63,11 +69,14 @@ public class PathSpawner : MonoBehaviour
                 rand = Random.Range(0, templates.leftOpening.Length);
                 GameObject Path = Instantiate(templates.leftOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
 
-                GameObject PathBranch = transform.parent.transform.Find("Path_R").gameObject;
-                PathBranch.SetActive(true);
+                if(transform.parent.Find("Path_R").gameObject != null)
+                {
+                    GameObject PathBranch = transform.parent.Find("Path_R").gameObject;
+                    PathBranch.SetActive(true);
+                    GameObject PathReciever = Path.transform.Find("Path_L").gameObject;
+                    PathReciever.SetActive(true);
+                }
 
-                GameObject PathReciever = Path.transform.Find("Path_L").gameObject;
-                PathReciever.SetActive(true);
             }
             else if (OpeningDirection == 3)
             {
@@ -75,13 +84,16 @@ public class PathSpawner : MonoBehaviour
                 rand = Random.Range(0, templates.rightOpening.Length);
                 GameObject Path = Instantiate(templates.rightOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
 
-                GameObject PathBranch = transform.parent.transform.Find("Path_L").gameObject;
-                PathBranch.SetActive(true);
+                if(transform.parent.Find("Path_L").gameObject != null)
+                {
+                    GameObject PathBranch = transform.parent.Find("Path_L").gameObject;
+                    PathBranch.SetActive(true);
+                    GameObject PathReciever = Path.transform.Find("Path_R").gameObject;
+                    PathReciever.SetActive(true);
+                }
 
-                GameObject PathReciever = Path.transform.Find("Path_R").gameObject;
-                PathReciever.SetActive(true);
             }
-            Instantiate(templates.PathBase, transform.position, Quaternion.identity, Path_Parent.transform);
+            
             Spawned = true;
         }
     }
