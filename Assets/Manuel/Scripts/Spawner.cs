@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour {
     {
         //StartCoroutine(SpawnWave());
         //Time.timeScale = 0.1f;
-        FindObjectOfType<UIController>().UpdateWave(EnemysPerWave);
+        FindObjectOfType<MasterSpawner>();
     }
 
     public void StartNextWave()
