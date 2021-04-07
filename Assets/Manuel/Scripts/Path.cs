@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Path : MonoBehaviour
 {
-	public static Path instance;
-
 	[SerializeField] private Vector2[] wayPoints;
 	[SerializeField] private float fieldSize = 1f;
+    [SerializeField] private GameObject PathStart;
 
-	public void Awake() {
-		instance = this;
-	}
+    private void Awake()
+    {
+        Instantiate(PathStart, wayPoints[0] + (Vector2)transform.position, Quaternion.identity, transform);
+    }
 
-	public void OnDrawGizmosSelected() {
+    public void OnDrawGizmosSelected() {
 		for (int i = 0; i < wayPoints.Length; i++) {
 			Gizmos.color = Color.green;
 			Gizmos.DrawWireSphere(wayPoints[i] + (Vector2)transform.position, fieldSize / 2f);
