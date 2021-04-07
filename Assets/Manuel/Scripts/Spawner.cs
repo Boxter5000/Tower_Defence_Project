@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
     [SerializeField] private Entity enemyPrefab;
-    [SerializeField] private Path path;
     [SerializeField] private float TimeBetweneEnemySpawn = 0.25f;
     public bool AutoStart = false;
 
@@ -38,8 +37,8 @@ public class Spawner : MonoBehaviour {
 
     private IEnumerator SpawnEnemy() {
         for (int t = 0; t < EnemysPerWave; t++) {
-                Entity newEnemy = Instantiate(enemyPrefab, path.GetPoint(0), Quaternion.identity, transform);
-                newEnemy.SetPath(path);
+                Entity newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity, transform);
+                //newEnemy.SetPath(path);
                 EnemysInScene++;
             for (float u = 0; u < TimeBetweneEnemySpawn; u += Time.deltaTime) {
                 yield return null;
