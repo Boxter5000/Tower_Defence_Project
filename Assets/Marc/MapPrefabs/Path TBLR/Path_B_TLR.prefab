@@ -6370,3 +6370,5 @@ MonoBehaviour:
   - {x: -31, y: 0}
   spawnPrefab: {fileID: 8039006344941246951, guid: e1bdddbd8217bba4ab23ba5bf4d5ace8,
     type: 3}
+  estatePrefab: {fileID: 4517033616514124632, guid: da5d5e2fdde70e4458cca7675af166a1,
+    type: 3}
