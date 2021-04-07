@@ -10,6 +10,7 @@ TagManager:
   - PathTemplate
   - Path
   - GridParant
+  - FreeRealEstate
   layers:
   - Default
   - TransparentFX
