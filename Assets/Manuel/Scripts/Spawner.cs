@@ -7,27 +7,21 @@ public class Spawner : MonoBehaviour {
     [SerializeField] private float TimeBetweneEnemySpawn = 0.25f;
     public bool AutoStart = false;
 
-    int EnemysInScene;
+    public static int EnemysInScene;
 
     public int EnemysPerWave = 1;
 
     void Start()
     {
-        //StartCoroutine(SpawnWave());
-        //Time.timeScale = 0.1f;
-        FindObjectOfType<MasterSpawner>();
+        FindObjectOfType<MasterSpawner>().AddMeSenpai(this);
     }
 
     public void StartNextWave()
     {
-        if(EnemysInScene <= 0)
-        {
-           StartCoroutine(SpawnWave());
-        }
+        StartCoroutine(SpawnWave());
     }
 
     private IEnumerator SpawnWave() {
-        FindObjectOfType<UIController>().UpdateWave(EnemysPerWave);
         TimeBetweneEnemySpawn = TimeBetweneEnemySpawn / 10f;
         StartCoroutine(SpawnEnemy());
         for (float t = 0; t < 3.0f; t += Time.deltaTime) {
@@ -59,5 +53,10 @@ public class Spawner : MonoBehaviour {
         {
             StartCoroutine(SpawnWave());
         }
+    }
+
+    private void OnDestroy() {
+
+        FindObjectOfType<MasterSpawner>().RemoveMeSenpai(this);
     }
 }

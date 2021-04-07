@@ -10,6 +10,7 @@ TagManager:
   - PathTemplate
   - Path
   - GridParant
+  - FreeRealEstate
   layers:
   - Default
   - TransparentFX
@@ -55,4 +56,7 @@ TagManager:
     locked: 0
   - name: Path_Extention
     uniqueID: 3830665587
+    locked: 0
+  - name: Entitties
+    uniqueID: 3760665341
     locked: 0

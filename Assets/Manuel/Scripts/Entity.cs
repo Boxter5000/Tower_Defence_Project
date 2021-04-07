@@ -74,6 +74,7 @@ public class Entity : MonoBehaviour {
 	}
 
 	public void SetPath(Path path) {
+		nextCheckpoint = 0;
 		currentPath = path;
 
 	}

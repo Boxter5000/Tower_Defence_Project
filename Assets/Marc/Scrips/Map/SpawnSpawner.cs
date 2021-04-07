@@ -19,7 +19,6 @@ public class SpawnSpawner : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(transform.position);
         for (int i = 0; i < spawnPositions.Length; i++)
         {
             Vector2 checkPosition = spawnPositions[i] + (Vector2)transform.position;
