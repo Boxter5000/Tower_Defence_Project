@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnSpawner : MonoBehaviour {
     /// <summary>
-    /// index 0 = top
+    /// index 0 = top1
     /// index 1 = bottom
     /// index 2 = left
     /// index 3 = right
