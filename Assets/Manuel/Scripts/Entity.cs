@@ -31,10 +31,7 @@ public class Entity : MonoBehaviour {
 
 		if(currentPath != null) {
 			float localProgress = (Time.time - lastCheckpointReachedTime) / lerpSpeedMultiplier;
-			if (localProgress < 0.0f)
-				localProgress = 0.0f;
-			if (localProgress > 1.0f)
-				localProgress = 1.0f;
+			if (localProgress != Mathf.Infinity)
 			transform.position = moveSpeedOverLocalProgress.Evaluate(localProgress) * (nextPosition - lastCheckpointPosition) + lastCheckpointPosition;
 
 
