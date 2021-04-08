@@ -62,7 +62,7 @@ public class Entity : MonoBehaviour {
         Debug.Log("-1 live");
         spawner = transform.parent.GetComponent<Spawner>();
         spawner.EnemyFuckingDied();
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 	public float GetProgress() {
 		return progress;
