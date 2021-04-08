@@ -15,8 +15,8 @@ public class Entity : MonoBehaviour {
 	private int nextCheckpoint = -1;    //specifies the next checkpoint this entity goes to
 	private Vector2 nextPosition;       //specifies the next position this entity goes to
 
-	private float lerpSpeedMultiplier = 1;
-	private float lastCheckpointReachedTime;
+	private float lerpSpeedMultiplier = 1.0f;
+	private float lastCheckpointReachedTime = 0.0f;
 	private Vector2 lastCheckpointPosition;
 
 	private Path currentPath;
@@ -27,11 +27,14 @@ public class Entity : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void FixedUpdate() {
+	void LateUpdate() {
 
 		if(currentPath != null) {
 			float localProgress = (Time.time - lastCheckpointReachedTime) / lerpSpeedMultiplier;
-			Debug.Log(moveSpeedOverLocalProgress.Evaluate(localProgress) * (nextPosition - lastCheckpointPosition) + lastCheckpointPosition);
+			if (localProgress < 0.0f)
+				localProgress = 0.0f;
+			if (localProgress > 1.0f)
+				localProgress = 1.0f;
 			transform.position = moveSpeedOverLocalProgress.Evaluate(localProgress) * (nextPosition - lastCheckpointPosition) + lastCheckpointPosition;
 
 
