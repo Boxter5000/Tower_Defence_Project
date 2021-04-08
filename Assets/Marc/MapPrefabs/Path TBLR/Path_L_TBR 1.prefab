@@ -1491,7 +1491,7 @@ GameObject:
   - component: {fileID: 3571117487678272735}
   - component: {fileID: 5901844470949718974}
   m_Layer: 0
-  m_Name: Path_Border_L_B
+  m_Name: Path_Border_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3040,7 +3040,7 @@ GameObject:
   - component: {fileID: 8927312696485389823}
   - component: {fileID: 7486234317956156820}
   m_Layer: 0
-  m_Name: Path_Border_L_R
+  m_Name: Path_Border_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3653,7 +3653,7 @@ GameObject:
   - component: {fileID: 2747340159219529435}
   - component: {fileID: 7764169433580513875}
   m_Layer: 0
-  m_Name: Path_Border_L_T
+  m_Name: Path_Border_T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,8 +5,8 @@ using UnityEngine;
 public class PathSpawner : MonoBehaviour
 {
     public int OpeningDirection;
-    // 1 --> Path on bottom
     // 0 --> Path on top
+    // 1 --> Path on bottom
     // 2 --> Path on left
     // 3 --> Path on right
 

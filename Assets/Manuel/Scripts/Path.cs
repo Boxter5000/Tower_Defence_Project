@@ -7,10 +7,14 @@ public class Path : MonoBehaviour
 	[SerializeField] private Vector2[] wayPoints;
 	[SerializeField] private float fieldSize = 1f;
     [SerializeField] private GameObject PathStart;
+	[SerializeField] private bool isDividedPath = false;
 
-    private void Awake()
+
+	private void Awake()
     {
-        Instantiate(PathStart, wayPoints[0] + (Vector2)transform.position, Quaternion.identity, transform);
+        if (!isDividedPath) {
+			Instantiate(PathStart, wayPoints[0] + (Vector2)transform.position, Quaternion.identity, transform);
+		}
     }
 
     public void OnDrawGizmosSelected() {
