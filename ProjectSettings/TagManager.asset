@@ -54,6 +54,12 @@ TagManager:
   - name: Path
     uniqueID: 3481272385
     locked: 0
+  - name: Border_Under_Spawner
+    uniqueID: 1129054481
+    locked: 0
+  - name: Spawner_Path
+    uniqueID: 3275715759
+    locked: 0
   - name: Path_Extention
     uniqueID: 3830665587
     locked: 0

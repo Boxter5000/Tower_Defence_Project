@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Marc/Scene/MapPrefabs.unity
+    guid: 943ce0621de6b8a4fa65ddd62327773f
   m_configObjects: {}
