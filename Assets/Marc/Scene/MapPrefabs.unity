@@ -820,39 +820,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6160141646781347829, guid: 6b078b4b7a0826d4a8821f11b933dc13,
+    - target: {fileID: 6160141646279639117, guid: 6b078b4b7a0826d4a8821f11b933dc13,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1994871228}
-    - target: {fileID: 6160141646781347829, guid: 6b078b4b7a0826d4a8821f11b933dc13,
+      propertyPath: InitialLife
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160141646279639117, guid: 6b078b4b7a0826d4a8821f11b933dc13,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      propertyPath: InitialMoney
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 6160141646948608511, guid: 6b078b4b7a0826d4a8821f11b933dc13,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 630042861}
-    - target: {fileID: 6160141646948608511, guid: 6b078b4b7a0826d4a8821f11b933dc13,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartTheArmageddon
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160141646948608511, guid: 6b078b4b7a0826d4a8821f11b933dc13,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MasterSpawner, Assembly-CSharp
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b078b4b7a0826d4a8821f11b933dc13, type: 3}
---- !u!1 &1994871228 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6160141646279639110, guid: 6b078b4b7a0826d4a8821f11b933dc13,
-    type: 3}
-  m_PrefabInstance: {fileID: 1901163070}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2093407530 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2845468703144000689, guid: 19b2537d27368124d890f2f42581f585,

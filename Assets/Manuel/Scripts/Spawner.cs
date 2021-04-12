@@ -6,14 +6,15 @@ public class Spawner : MonoBehaviour {
     [SerializeField] private Entity enemyPrefab;
     [SerializeField] private float TimeBetweneEnemySpawn = 0.25f;
     public bool AutoStart = false;
-
     public static int EnemysInScene;
-
     public int EnemysPerWave = 1;
+
+    private UIController uiController;
 
     void Start()
     {
         FindObjectOfType<MasterSpawner>().AddMeSenpai(this);
+        uiController = FindObjectOfType<UIController>();
     }
 
     public void StartNextWave()
@@ -38,7 +39,7 @@ public class Spawner : MonoBehaviour {
                 yield return null;
             }
         }
-        EnemysPerWave += 10000;
+        EnemysPerWave += 5;
     }
 
     public void SetAutoStart()
@@ -57,5 +58,15 @@ public class Spawner : MonoBehaviour {
 
     private void OnDisable() {
         //FindObjectOfType<MasterSpawner>().RemoveMeSenpai(null);
+    }
+
+    public void TransfereMoney(int Money)
+    {
+        uiController.AddMoney(Money);
+    }
+
+    public void EnemyCompleatedPath(int Damage)
+    {
+        uiController.UpdateLife(Damage);
     }
 }

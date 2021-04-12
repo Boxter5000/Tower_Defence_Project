@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy1 : MonoBehaviour
 {
+    [SerializeField] int MoneyOnKill;
     public float HitPoints;
     Spawner spawner;
     bool isAlive = true;
@@ -22,9 +23,10 @@ public class Enemy1 : MonoBehaviour
         HitPoints -= DamageReceved;
         if(HitPoints <= 0 && isAlive)
         {
+            spawner.EnemyFuckingDied();
+            spawner.TransfereMoney(MoneyOnKill);
             isAlive = false;
-        spawner.EnemyFuckingDied();
-        Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

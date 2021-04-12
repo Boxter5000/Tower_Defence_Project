@@ -67,7 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9e9f352a01e5840808324a763f5bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpeningDirection: 0
+  coordinates: {x: 0, y: 0}
+  BuyoutPrize: 1000
 --- !u!61 &208851639950947927
 BoxCollider2D:
   m_ObjectHideFlags: 0

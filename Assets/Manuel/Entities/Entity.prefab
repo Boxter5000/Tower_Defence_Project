@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115cdf4671743f8438cc33d0982e64b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoneyOnKill: 0
   HitPoints: 5
 --- !u!114 &3520364927365370850
 MonoBehaviour:
@@ -159,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1224b9ef1f3565946956f4d4f112908d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 500
   moveSpeedOverLocalProgress:
     serializedVersion: 2
     m_Curve:
@@ -184,3 +185,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  DamageOnPathCompleation: 1

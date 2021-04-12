@@ -106,8 +106,6 @@ public class TowerBase : MonoBehaviour
 
     public void ManageRangeVisuals(bool State)
     {
-        Debug.Log("Nigger");
-
         GameObject RangeVisual = transform.Find("RangeVisual").gameObject;
 
         RangeVisual.GetComponent<SpriteRenderer>().enabled = State;

@@ -12,17 +12,20 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     [SerializeField] public GameObject Collider;
     [SerializeField] private float TowerSize;
     [SerializeField] private LayerMask NotPlacable;
+    [SerializeField] private int TowerConst;
 
     private bool obstrakted;
     private GameObject TowerOnMouse;
     private Vector3 castPoint;
     private RectTransform rectTransform;
     private TowerBase towerBase;
+    private UIController uiController;
     
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        uiController = FindObjectOfType<UIController>();
     }
     private void Update()
     {
@@ -53,13 +56,11 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
 
         if(towerCollision != null)
         {
-            Debug.Log("Is Colliding");
             TowerOnMouse.transform.Find("sprite").GetComponent<SpriteRenderer>().color = Color.red;
             obstrakted = true;
         }
         else
         {
-            Debug.Log("Placeble");
             TowerOnMouse.transform.Find("sprite").GetComponent<SpriteRenderer>().color = Color.white;
             obstrakted = false;
         }
@@ -67,12 +68,14 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (obstrakted)
+        if (obstrakted || uiController.currentMoney < TowerConst)
         {
+            
             Destroy(towerBase.gameObject);
         }
-        else
+        else if(uiController.currentMoney >= TowerConst)
         {
+            uiController.AddMoney(TowerConst * -1);
             TowerOnMouse.GetComponent<Collider2D>().enabled = true;
             TowerBase towerBase = TowerOnMouse.GetComponent<TowerBase>();
             towerBase.ManageShooting(true);

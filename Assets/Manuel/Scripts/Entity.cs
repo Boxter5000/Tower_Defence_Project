@@ -10,6 +10,7 @@ public class Entity : MonoBehaviour {
 	private float movementSpeed;        //how fast this entity moves throught the level
 	[SerializeField]
 	private AnimationCurve moveSpeedOverLocalProgress;
+    [SerializeField] int DamageOnPathCompleation = 1;
 
 	private float progress;             //specifies how far this entity progressed in this level
 	private int nextCheckpoint = -1;    //specifies the next checkpoint this entity goes to
@@ -62,6 +63,7 @@ public class Entity : MonoBehaviour {
         Debug.Log("-1 live");
         spawner = transform.parent.GetComponent<Spawner>();
         spawner.EnemyFuckingDied();
+        spawner.EnemyCompleatedPath(DamageOnPathCompleation);
         Destroy(gameObject);
     }
 	public float GetProgress() {

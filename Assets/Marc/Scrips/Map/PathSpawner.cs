@@ -7,12 +7,14 @@ public class PathSpawner : MonoBehaviour
     public Vector2 coordinates = Vector2.zero;
     // higher Value = layer
     // other Value = distance from default axis
+    public int BuyoutPrize;
 
 
     PathTemplates templates;
     private int rand;
     private bool Spawned = false;
     private GameObject Path_Parent;
+    private UIController uIController;
 
 
     private void Awake()
@@ -20,11 +22,21 @@ public class PathSpawner : MonoBehaviour
         //Invoke("Spawn", 2f);
         templates = GameObject.FindGameObjectWithTag("PathTemplate").GetComponent<PathTemplates>();
         Path_Parent = GameObject.FindGameObjectWithTag("GridParant");
+        uIController = FindObjectOfType<UIController>();
     }
 
     private void OnMouseDown()
     {
-        Spawn();
+        if(uIController.currentMoney >= BuyoutPrize)
+        {
+            Spawn();
+            uIController.AddMoney(BuyoutPrize * -1);
+            BuyoutPrize = Mathf.RoundToInt(BuyoutPrize * 1.2f);
+        }
+        else
+        {
+            Debug.Log("you need to have atleased" + BuyoutPrize);
+        }
     }
 
     void Spawn()
