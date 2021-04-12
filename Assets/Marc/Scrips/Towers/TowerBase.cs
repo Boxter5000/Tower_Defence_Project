@@ -12,13 +12,14 @@ public class TowerBase : MonoBehaviour
     public float shootingRate;
     public float Range;
     public float TowerDamage;
+    [SerializeField] CircleCollider2D RangeCollider;
 
     private Transform target;
     private Vector3 targetPos;
     private Vector3 thisPos;
     private float angle;
     private bool CR_runing;
-    private CircleCollider2D CC2d;
+    private bool IsShootingEnabled = true;
 
     List<GameObject> EnemysList;
 
@@ -27,36 +28,41 @@ public class TowerBase : MonoBehaviour
     private void Awake()
     {
         EnemysList = new List<GameObject>();
-        CC2d = GetComponent<CircleCollider2D>();
-        CC2d.radius = Range;
+        RangeCollider.radius = Range;
     }
 
     public void GetTargetPos()
     {
-        targetPos = EnemysList[0].transform.position;
-        thisPos = transform.position;
-
-        targetPos = targetPos - thisPos;
-        //calkulate the radius and the angel of the rotation
-        angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + offset));
-        if (target != null)
+        if (IsShootingEnabled)
         {
-            Debug.DrawLine(thisPos, target.position);
+            targetPos = EnemysList[0].transform.position;
+            thisPos = transform.position;
+
+            targetPos = targetPos - thisPos;
+            //calkulate the radius and the angel of the rotation
+            angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + offset));
+            if (target != null)
+            {
+                Debug.DrawLine(thisPos, target.position);
+            }
         }
     }
     
     IEnumerator shootTimer()
     {
-        CR_runing = true;
-        //while something is in range, shoot
-        while(EnemysList.Count != 0)
+        if (IsShootingEnabled)
         {
-            GetTargetPos();
-            InstantiateShoot();
-            yield return new WaitForSeconds(shootingRate);
+            CR_runing = true;
+            //while something is in range, shoot
+            while(EnemysList.Count != 0)
+            {
+                GetTargetPos();
+                InstantiateShoot();
+                yield return new WaitForSeconds(shootingRate);
+            }
+            CR_runing = false;
         }
-        CR_runing = false;
     }
 
     public void InstantiateShoot()
@@ -69,8 +75,11 @@ public class TowerBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject currentEnemy = collision.gameObject;
-        EnemysList.Add(currentEnemy);
+        if (collision.CompareTag("Enemy"))
+        {
+            GameObject currentEnemy = collision.gameObject;
+            EnemysList.Add(currentEnemy);   
+        }
         //get the possition of the collidet enemy
         target = collision.transform;
         if(!CR_runing)
@@ -88,5 +97,20 @@ public class TowerBase : MonoBehaviour
         {
             CR_runing = false;
         }
+    }
+
+    public void ManageShooting(bool State)
+    {
+        IsShootingEnabled = State;
+    }
+
+    public void ManageRangeVisuals(bool State)
+    {
+        Debug.Log("Nigger");
+
+        GameObject RangeVisual = transform.Find("RangeVisual").gameObject;
+
+        RangeVisual.GetComponent<SpriteRenderer>().enabled = State;
+        RangeVisual.transform.localScale = new Vector2(Range * 2, Range * 2);
     }
 }

@@ -10,10 +10,15 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     [SerializeField] private GameObject Tower;
     [SerializeField] private GameObject Button;
     [SerializeField] public GameObject Collider;
+    [SerializeField] private float TowerSize;
+    [SerializeField] private LayerMask NotPlacable;
 
+    private bool obstrakted;
+    private GameObject TowerOnMouse;
     private Vector3 castPoint;
     private RectTransform rectTransform;
-    private Image image;
+    private TowerBase towerBase;
+    
 
     private void Awake()
     {
@@ -21,43 +26,57 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
     }
     private void Update()
     {
-        Vector3 mouse = Input.mousePosition;
+        Vector2 mouse = Input.mousePosition;
         castPoint = Camera.main.ScreenToWorldPoint(mouse);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Begin Click");
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Begin drag");
-        GameObject tower = Instantiate(Tower, new Vector3(castPoint.x, castPoint.y, 0.5f), Quaternion.identity);
-        tower.GetComponent<TowerBase>();
+        TowerOnMouse = Instantiate(Tower, new Vector3(castPoint.x, castPoint.y, 0.5f), Quaternion.identity);
+        towerBase = TowerOnMouse.GetComponent<TowerBase>();
+
+        towerBase.ManageShooting(false);
+        towerBase.ManageRangeVisuals(true);
+
+        TowerOnMouse.GetComponent<Collider2D>().enabled = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Drag");
-        //rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        TowerOnMouse.transform.position = castPoint - Vector3.forward * castPoint.z;
+
+        Collider2D towerCollision = Physics2D.OverlapCircle(TowerOnMouse.transform.position, TowerSize, NotPlacable);
+
+        if(towerCollision != null)
+        {
+            Debug.Log("Is Colliding");
+            TowerOnMouse.transform.Find("sprite").GetComponent<SpriteRenderer>().color = Color.red;
+            obstrakted = true;
+        }
+        else
+        {
+            Debug.Log("Placeble");
+            TowerOnMouse.transform.Find("sprite").GetComponent<SpriteRenderer>().color = Color.white;
+            obstrakted = false;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Destroy(gameObject);
-    }
-
-    public bool canNotPlace(bool Collidet)
-    {
-        if (Collidet)
+        if (obstrakted)
         {
-            image.GetComponent<Image>().color = new Color32(255, 0, 0, 200);
+            Destroy(towerBase.gameObject);
         }
         else
         {
-            image.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            TowerOnMouse.GetComponent<Collider2D>().enabled = true;
+            TowerBase towerBase = TowerOnMouse.GetComponent<TowerBase>();
+            towerBase.ManageShooting(true);
+            towerBase.ManageRangeVisuals(false);
         }
-        return Collidet;
     }
 }
