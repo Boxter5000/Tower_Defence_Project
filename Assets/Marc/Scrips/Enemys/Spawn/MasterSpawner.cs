@@ -33,7 +33,12 @@ public class MasterSpawner : MonoBehaviour
     private void StartWaves() {
         DripController.UpdateWave(CurrentWave);
         foreach (Spawner sp in SpawnerList) {
-            sp.StartNextWave();
+            if(sp != null) {
+                sp.StartNextWave();
+            }
+            else {
+                SpawnerList.Remove(sp);
+            }
         }
         CurrentWave++;
     }

@@ -6,19 +6,15 @@ public class PathDivider : PathStart {
     [SerializeField] private Path leftPath;
     [SerializeField] private Path rightPath;
 
-    private bool goLeft = false;
+    private void Update() {
+    }
     private void OnTriggerEnter2D(Collider2D collision) {
-        GameObject EnemyCollidet = collision.gameObject;
-
-        if (EnemyCollidet != null) {
-            Entity entity = EnemyCollidet.GetComponent<Entity>();
-            if (goLeft) {
-                entity?.SetPath(leftPath);
-            }
-            else {
-                entity?.SetPath(rightPath);
-            }
-            goLeft = !goLeft;
+        Entity entity = collision.gameObject.GetComponent<Entity>();
+        if (Random.Range(0, 2) == 0) {
+            entity?.SetPath(leftPath);
+        }
+        else { 
+            entity?.SetPath(rightPath);
         }
     }
 }

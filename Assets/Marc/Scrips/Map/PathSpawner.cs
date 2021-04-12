@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PathSpawner : MonoBehaviour
 {
-    public int OpeningDirection;
-    // 0 --> Path on top
-    // 1 --> Path on bottom
-    // 2 --> Path on left
-    // 3 --> Path on right
+    public Vector2 coordinates = Vector2.zero;
+    // higher Value = layer
+    // other Value = distance from default axis
 
 
     PathTemplates templates;
     private int rand;
     private bool Spawned = false;
     private GameObject Path_Parent;
+
 
     private void Awake()
     {
@@ -32,68 +31,53 @@ public class PathSpawner : MonoBehaviour
     {
         if (!Spawned)
         {
+            int sector = 0; 
+            if (coordinates.x > 0.0f) {
+                sector += 3;
+            } else if (coordinates.x < 0.0f) {
+                sector -= 3;
+            }
+            if (coordinates.y > 0.0f) {
+                sector += 2;
+            } else if (coordinates.y < 0.0f) {
+
+                sector -= 2;
+            }
             Instantiate(templates.PathBase, transform.position, Quaternion.identity, Path_Parent.transform);
-            if (OpeningDirection == 0)
-            {
-                //Needs opening to the bottom
-                rand = Random.Range(0, templates.bottomOpening.Length);
-                GameObject Path = Instantiate(templates.bottomOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
-
-                if(transform.parent.Find("Path_T").gameObject != null)
-                {
-                    GameObject PathBranch = transform.parent.Find("Path_T").gameObject;
-                    PathBranch.SetActive(true);
-                    GameObject PathReciever = Path.transform.Find("Path_B").gameObject;
-                    PathReciever.SetActive(true);
-                }
-
+            SpawnSpawner Path = null;
+            rand = Random.Range(0, templates.bottomLeftOpening.Length);
+            switch (sector) {
+                case -5:
+                    Path = Instantiate(templates.topRightOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                    break;
+                case -3:
+                    Path = Instantiate(templates.rightOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                    break;
+                case -2:
+                    Path = Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                    break;
+                case -1:
+                    Path = Instantiate(templates.bottomRightOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                    break;
+                case 0:
+                    Path = null;
+                    break;
+                case 1:
+                    Path = Instantiate(templates.topLeftOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                    break;
+                case 2:
+                    Path = Instantiate(templates.bottomOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                    break;
+                case 3:
+                    Path = Instantiate(templates.leftOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                    break;
+                case 5:
+                    Path = Instantiate(templates.bottomLeftOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
+                    break;
+                default:
+                    break;
             }
-            else if (OpeningDirection == 1)
-            {
-                //Needs opening to the top
-                rand = Random.Range(0, templates.topOpening.Length);
-                GameObject Path = Instantiate(templates.topOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
-
-                if(transform.parent.Find("Path_B").gameObject != null)
-                {
-                    GameObject PathBranch = transform.parent.Find("Path_B").gameObject;
-                    PathBranch.SetActive(true);
-                    GameObject PathReciever = Path.transform.Find("Path_T").gameObject;
-                    PathReciever.SetActive(true);
-                }
-
-            }
-            else if (OpeningDirection == 2)
-            {
-                //Needs opening to the left
-                rand = Random.Range(0, templates.leftOpening.Length);
-                GameObject Path = Instantiate(templates.leftOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
-
-                if(transform.parent.Find("Path_R").gameObject != null)
-                {
-                    GameObject PathBranch = transform.parent.Find("Path_R").gameObject;
-                    PathBranch.SetActive(true);
-                    GameObject PathReciever = Path.transform.Find("Path_L").gameObject;
-                    PathReciever.SetActive(true);
-                }
-
-            }
-            else if (OpeningDirection == 3)
-            {
-                //Needs opening to the right
-                rand = Random.Range(0, templates.rightOpening.Length);
-                GameObject Path = Instantiate(templates.rightOpening[rand], transform.position, Quaternion.identity, Path_Parent.transform);
-
-                if(transform.parent.Find("Path_L").gameObject != null)
-                {
-                    GameObject PathBranch = transform.parent.Find("Path_L").gameObject;
-                    PathBranch.SetActive(true);
-                    GameObject PathReciever = Path.transform.Find("Path_R").gameObject;
-                    PathReciever.SetActive(true);
-                }
-
-            }
-            
+            Path?.SpawnFollowingSpawners(coordinates);
             Spawned = true;
         }
     }

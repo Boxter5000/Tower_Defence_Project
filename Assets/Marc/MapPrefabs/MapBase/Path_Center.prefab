@@ -31,8 +31,8 @@ Transform:
   - {fileID: 8881313230205365454}
   - {fileID: 238557195324463640}
   - {fileID: 1656880948535187959}
-  - {fileID: 1360495613016218915}
   - {fileID: 2471564745799344472}
+  - {fileID: 1360495613016218915}
   - {fileID: 3806553150543364853}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,10 +54,15 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  spawnPrefab: {fileID: 8039006344941246951, guid: e1bdddbd8217bba4ab23ba5bf4d5ace8,
+  spawnPrefab: {fileID: 4810888115662909873, guid: e1bdddbd8217bba4ab23ba5bf4d5ace8,
     type: 3}
   estatePrefab: {fileID: 4517033616514124632, guid: da5d5e2fdde70e4458cca7675af166a1,
     type: 3}
+  toDestroyOnLayerChange: []
+  topPath: {fileID: 6304041493315716452}
+  bottomPath: {fileID: 3482793689263855631}
+  rightPath: {fileID: 2845468703144000689}
+  leftPath: {fileID: 8182846573666456197}
 --- !u!1 &2405605147043274585
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +702,7 @@ Transform:
   - {fileID: 4600793137259685458}
   - {fileID: 3022409070317921476}
   m_Father: {fileID: 6465701771234676354}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &6240107202504620070
 Tilemap:
@@ -6137,7 +6142,7 @@ Transform:
   - {fileID: 8279129168169023447}
   - {fileID: 2462670681691348909}
   m_Father: {fileID: 6465701771234676354}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &5708164846041327542
 Tilemap:
