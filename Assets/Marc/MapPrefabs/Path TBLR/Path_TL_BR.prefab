@@ -30,9 +30,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8828477169918641629}
   - {fileID: 8611465275417140543}
   - {fileID: 7896305628194139823}
+  - {fileID: 8828477169918641629}
   m_Father: {fileID: 283512933129244676}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -243,7 +243,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1893897343
+  m_SortingLayerID: -1019251537
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -3817,7 +3817,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8393258572390455551}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &6290092080563899775
 Tilemap:
@@ -4208,7 +4208,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1893897343
+  m_SortingLayerID: -1019251537
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -6322,7 +6322,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1804701043
+  m_SortingLayerID: 1129054481
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -8605,7 +8605,7 @@ PrefabInstance:
     - target: {fileID: 3987666597299073914, guid: 078f384a123009e4cb5a16d011bd7745,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3987666597299073914, guid: 078f384a123009e4cb5a16d011bd7745,
         type: 3}
@@ -9564,7 +9564,7 @@ PrefabInstance:
     - target: {fileID: 64322418687814435, guid: 9d7c665eef09b3a49b9cf44aee0d8ac9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 64322418687814435, guid: 9d7c665eef09b3a49b9cf44aee0d8ac9,
         type: 3}

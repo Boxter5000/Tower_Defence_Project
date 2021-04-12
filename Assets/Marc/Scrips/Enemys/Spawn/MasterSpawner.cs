@@ -36,9 +36,6 @@ public class MasterSpawner : MonoBehaviour
             if(sp != null) {
                 sp.StartNextWave();
             }
-            else {
-                SpawnerList.Remove(sp);
-            }
         }
         CurrentWave++;
     }

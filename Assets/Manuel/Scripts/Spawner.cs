@@ -56,6 +56,6 @@ public class Spawner : MonoBehaviour {
     }
 
     private void OnDisable() {
-        FindObjectOfType<MasterSpawner>().RemoveMeSenpai(null);
+        //FindObjectOfType<MasterSpawner>().RemoveMeSenpai(null);
     }
 }
