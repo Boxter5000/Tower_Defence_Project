@@ -12,6 +12,7 @@ TagManager:
   - GridParant
   - FreeRealEstate
   - PathDivider
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -56,17 +57,10 @@ TagManager:
     uniqueID: 3481272385
     locked: 0
   - name: Border_Under_Spawner
-<<<<<<< Updated upstream
     uniqueID: 1129054481
     locked: 0
   - name: Spawner_Path
     uniqueID: 3275715759
-=======
-    uniqueID: 1804701043
-    locked: 0
-  - name: Spawner_Path
-    uniqueID: 1893897343
->>>>>>> Stashed changes
     locked: 0
   - name: Path_Extention
     uniqueID: 3830665587

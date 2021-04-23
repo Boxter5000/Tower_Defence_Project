@@ -710,10 +710,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2644474657745773493, guid: 6b078b4b7a0826d4a8821f11b933dc13,
+        type: 3}
+      propertyPath: m_Name
+      value: LifeNumber
+      objectReference: {fileID: 0}
     - target: {fileID: 6160141646279639110, guid: 6b078b4b7a0826d4a8821f11b933dc13,
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160141646279639110, guid: 6b078b4b7a0826d4a8821f11b933dc13,
+        type: 3}
+      propertyPath: m_TagString
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 6160141646279639114, guid: 6b078b4b7a0826d4a8821f11b933dc13,
         type: 3}
@@ -835,6 +845,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 630042861}
+    - target: {fileID: 6645255213216427258, guid: 6b078b4b7a0826d4a8821f11b933dc13,
+        type: 3}
+      propertyPath: TowerConst
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b078b4b7a0826d4a8821f11b933dc13, type: 3}
 --- !u!1 &2093407530 stripped
