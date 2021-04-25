@@ -95,14 +95,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d940a2bd2583845a4da7497ea80289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tag: Enemy
-  offset: -90
-  Bullet: {fileID: 3020561799071204703, guid: 1c6c277686c3fd846acc8b757f210a4a, type: 3}
-  BulletVelocity: 2000
-  shootingRate: 0.03
-  Range: 5
-  TowerDamage: 100
   RangeCollider: {fileID: 1038689799285384755}
+  PlayerTargetPoint: {fileID: 1896020284931528978, guid: 731149f59e1660243b0a3f56d72889da,
+    type: 3}
+  TowerIntarfaceObj: {fileID: 3761457138258886473, guid: 960ff82bc126ffc45b342bd7d9c768a4,
+    type: 3}
+  BulletVelocity: 2000
+  shootingRate: 0.3
+  Damage: 20
+  Range: 5
+  RotationalOffset: -90
+  Ammo: {fileID: 3020561799071204703, guid: 1c6c277686c3fd846acc8b757f210a4a, type: 3}
+  AimType: 1
+  BehaviorType: 0
 --- !u!58 &-4237223236210273748
 CircleCollider2D:
   m_ObjectHideFlags: 0
