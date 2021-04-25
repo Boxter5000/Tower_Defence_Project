@@ -3,92 +3,91 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TowerBase : MonoBehaviour
 {
     [Header("References")]
-        [SerializeField] private CircleCollider2D RangeCollider;
-        [SerializeField] private GameObject PlayerTargetPoint;
+        [SerializeField] private CircleCollider2D rangeCollider;
+        [SerializeField] private GameObject playerTargetPoint;
         
-        [HideInInspector] private TowerInterface Interface;
+        [HideInInspector] private TowerInterface towerInterface;
         [HideInInspector] private Transform target;                 //Reference to the target to shoot
         [HideInInspector] private Vector3 targetPos;                //Position of that Target
         [HideInInspector] private Vector3 thisPos;                  //Position of this Tower
-        [HideInInspector] private bool InRange = true;
-        [HideInInspector] private Vector2 PlayerPickTargetPos;
+        [HideInInspector] private bool inRange = true;
+        [HideInInspector] private Vector2 playerPickTargetPos;
 
+    
     [Header("Tower Specs")]
-        [SerializeField] private float BulletVelocity;
+        [SerializeField] private float bulletVelocity;
         [SerializeField] private float shootingRate;
-        [SerializeField] private float Damage;
-        [SerializeField] private float Range;
-        [SerializeField] private float RotationalOffset;
-        [SerializeField] public Bullet1 Ammo;
-        [SerializeField] public Aim AimType;
-        [SerializeField] private Behavior BehaviorType;
+        [SerializeField] private float damage;
+        [SerializeField] private float range;
+        [SerializeField] private float rotationalOffset;
+        [SerializeField] public Bullet1 ammo;
+        [SerializeField] public Aim aimType;
+        [SerializeField] private Behavior behaviorType;
 
     //Other Information
         [HideInInspector] private float angle;
-        [HideInInspector] private bool CR_runing = false;           //Is the Coroutine currently running?
-        [HideInInspector] private bool IsShootingEnabled = true;    //Is the Tower allowed to shoot (for draging and placing Towers)
-        [HideInInspector] List<GameObject> EnemysList;
-        [HideInInspector] private bool PlayerTargetIsSet;
-        [HideInInspector] private Vector3 TargetPoint;
+        [HideInInspector] private bool isCRRuning = false;           //Is the Coroutine currently running?
+        [HideInInspector] private bool isShootingEnabled = true;    //Is the Tower allowed to shoot (for draging and placing Towers)
+        [HideInInspector] List<GameObject> enemiesList;
 
     public enum Aim
     {
-        Auto_Target,
-        Player_Target,
-        In_Range
+        AutoTarget,
+        PlayerTarget,
+        InRange
     }
     public enum Behavior
     {
         Shot,
-        Mörser,
+        Moerser,
         Nova
     }
     private void Awake()
     {
-        Vector3 TargetPoint = Input.mousePosition;
-        EnemysList = new List<GameObject>();
-        RangeCollider.radius = Range;
+        enemiesList = new List<GameObject>();
+        rangeCollider.radius = range;
         
-        Interface = GameObject.FindGameObjectWithTag("UI").transform.Find("TowerInterface").GetComponent<TowerInterface>();
+        towerInterface = GameObject.FindGameObjectWithTag("UI").transform.Find("TowerInterface").GetComponent<TowerInterface>();
     }
-    IEnumerator shootTimer()
+    private IEnumerator ShootTimer()
     {
-        CR_runing = true;
-        if (IsShootingEnabled && CR_runing)
+        isCRRuning = true;
+        if (isShootingEnabled && isCRRuning)
         {
-            while(EnemysList.Count != 0 || AimType == Aim.Player_Target)
+            while(enemiesList.Count != 0 || aimType == Aim.PlayerTarget)
             {
                 
                 GetTargetType();
                 yield return new WaitForSeconds(shootingRate);
             }
-            CR_runing = false;
         }
     }
-    public void GetTargetType()
+
+    private void GetTargetType()
     {
-        switch (AimType)
+        switch (aimType)
         {
-            case Aim.Auto_Target:
+            case Aim.AutoTarget:
                 AimType_AutoTarget();
                 break;
-            case Aim.In_Range:
+            case Aim.InRange:
                 AimType_InRange();
                 break;
-            case Aim.Player_Target:
+            case Aim.PlayerTarget:
                 AimType_PlayerTarget();
                 break;
         }
-        switch (BehaviorType)
+        switch (behaviorType)
         {
             case Behavior.Shot:
                 InstantiateShoot();
                 break;
-            case Behavior.Mörser:
+            case Behavior.Moerser:
                 InstantiateMörser();
                 break;
             case Behavior.Nova:
@@ -96,108 +95,114 @@ public class TowerBase : MonoBehaviour
                 break;
         }
     }
-    public void AimType_AutoTarget()
+    private void AimType_AutoTarget()
     {
-        if (IsShootingEnabled)
+        if (isShootingEnabled)
         {
-            targetPos = EnemysList[0].transform.position;
+            targetPos = enemiesList[0].transform.position;
 
             targetPos -= thisPos;
 
             //calkulate the radius and the angel of the rotation
             angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + RotationalOffset));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + rotationalOffset));
 
             if (targetPos != null)
                 Debug.DrawLine(thisPos, targetPos);
         }
     }
-    public void AimType_PlayerTarget()
+    private void AimType_PlayerTarget()
     {
-        targetPos = PlayerPickTargetPos;
+        targetPos = playerPickTargetPos;
         targetPos -= thisPos;
     }
-    public void AimType_InRange()
+    private void AimType_InRange()
     {
         targetPos = Vector3.zero;
     }
-    public void InstantiateShoot()
+    private void InstantiateShoot()
     {
-        Vector3 VelocityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
-        Bullet1 BulletClone = Instantiate(Ammo, transform.position, Quaternion.identity);
+        Vector3 velocityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
+        Bullet1 bulletClone = Instantiate(ammo, transform.position, Quaternion.identity);
 
-        BulletClone.Damage = Damage;
-        BulletClone.GiveDirection(VelocityDirection, BulletVelocity);
+        bulletClone.Damage = damage;
+        bulletClone.GiveDirection(velocityDirection, bulletVelocity);
     }
-    public void InstantiateMörser()
+    private void InstantiateMörser()
     {
-        Vector3 VelocityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
-        Bullet1 BulletClone = Instantiate(Ammo, transform.position, Quaternion.identity);
+        Vector3 velocityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
+        Bullet1 bulletClone = Instantiate(ammo, transform.position, Quaternion.identity);
 
-        BulletClone.Damage = Damage;
-        BulletClone.GiveDirection(VelocityDirection, BulletVelocity);
+        bulletClone.Damage = damage;
+        bulletClone.GiveDirection(velocityDirection, bulletVelocity);
     }
-    public void InstantiateNova()
+    private void InstantiateNova()
     {
-        Vector3 VelocityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
-        Bullet1 BulletClone = Instantiate(Ammo, transform.position, Quaternion.identity);
+        Vector3 velocityDirection = new Vector3(targetPos.x, targetPos.y, 0).normalized;
+        Bullet1 bulletClone = Instantiate(ammo, transform.position, Quaternion.identity);
 
-        BulletClone.Damage = Damage;
-        BulletClone.GiveDirection(VelocityDirection, BulletVelocity);
+        bulletClone.Damage = damage;
+        bulletClone.GiveDirection(velocityDirection, bulletVelocity);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") && aimType != Aim.PlayerTarget)
         {
-            EnemysList.Add(collision.gameObject);   
+            enemiesList.Add(collision.gameObject);   
 
-            if(!CR_runing)
+            if(!isCRRuning)
             {
-                StartCoroutine("shootTimer");
+                StartCoroutine("ShootTimer");
             }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         GameObject currentEnemy = collision.gameObject;
-        EnemysList.Remove(currentEnemy);
+        enemiesList.Remove(currentEnemy);
         //Enemy is out of range 
-        if(EnemysList.Count == 0)
+        if(enemiesList.Count == 0 && aimType != Aim.PlayerTarget)
         {
-            CR_runing = false;
+            isCRRuning = false;
+            StopCoroutine("ShootTimer");
         }
     }
     public void GetPlacePos()
     {
         thisPos = transform.position;
-        if (AimType == Aim.Player_Target)
+        if (aimType == Aim.PlayerTarget)
         {
-            Instantiate(PlayerTargetPoint, transform.position, quaternion.identity, transform);
+            Instantiate(playerTargetPoint, transform.position, quaternion.identity, transform);
         }
     }
-    public void ManageShooting(bool State)
+    public void ManageShooting(bool state)
     {
-        IsShootingEnabled = State;
+        isShootingEnabled = state;
     }
-    public void ManageRangeVisuals(bool State)
+    public void ManageRangeVisuals(bool state)
     {
-        GameObject RangeVisual = transform.Find("RangeVisual").gameObject;
+        GameObject rangeVisual = transform.Find("RangeVisual").gameObject;
 
-        RangeVisual.GetComponent<SpriteRenderer>().enabled = State;
-        RangeVisual.transform.localScale = new Vector2(Range * 2, Range * 2);
+        rangeVisual.GetComponent<SpriteRenderer>().enabled = state;
+        rangeVisual.transform.localScale = new Vector2(range * 2, range * 2);
     }
-    public void SetPlayerPosition(Vector2 PlayerPos)
+    public void SetPlayerPosition(Vector2 playerPos)
     {
-        PlayerPickTargetPos = PlayerPos;
+        playerPickTargetPos = playerPos;
+
+        //calkulate the radius and the angel of the rotation
+        angle = Mathf.Atan2(playerPickTargetPos.y - thisPos.y, playerPickTargetPos.x- thisPos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + rotationalOffset));
+        
         //manage this later with Master Spawner
-        if(!CR_runing)
+        if(!isCRRuning)
         {
-            StartCoroutine("shootTimer");
+            StartCoroutine("ShootTimer");
         }
     }
     public void OnMouseDown()
     {
-        Interface.gameObject.SetActive(true);
-        Interface.GetReferenceTower(this);
+        towerInterface.gameObject.SetActive(true);
+        towerInterface.GetReferenceTower(this);
     }
 }

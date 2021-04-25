@@ -8,15 +8,15 @@ public class TowerInterface : MonoBehaviour
     
     private void ShowDiferentUI()
     {
-        if (_towerBase.AimType == TowerBase.Aim.Player_Target)
+        if (_towerBase.aimType == TowerBase.Aim.PlayerTarget)
         {
             
         }
-        if (_towerBase.AimType == TowerBase.Aim.In_Range)
+        if (_towerBase.aimType == TowerBase.Aim.InRange)
         {
             
         }
-        if (_towerBase.AimType == TowerBase.Aim.Auto_Target)
+        if (_towerBase.aimType == TowerBase.Aim.AutoTarget)
         {
             
         }
