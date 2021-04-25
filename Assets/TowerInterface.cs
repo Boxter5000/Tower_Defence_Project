@@ -33,6 +33,13 @@ public class TowerInterface : MonoBehaviour
 
     public void SellTower()
     {
+        gameObject.SetActive(false);
         Destroy(_towerBase.gameObject);
+        _towerBase = null;
+    }
+
+    public void DisableInterface()
+    {
+        gameObject.SetActive(false);
     }
 }

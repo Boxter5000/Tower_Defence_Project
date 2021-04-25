@@ -9,15 +9,19 @@ public class CameraDrag : MonoBehaviour
     public float smoothSpeed = 2.0f;
     public float minOrtho = 1.0f;
     public float maxOrtho = 20.0f;
+    [SerializeField] private LayerMask inputLayerMask;
 
     private Vector3 ResetCamera;
     private Vector3 Origin;
     private Vector3 Diference;
     private bool Drag = false;
+    private Camera camera;
     void Start()
     {
-        ResetCamera = Camera.main.transform.position;
-        targetOrtho = Camera.main.orthographicSize;
+        camera = Camera.main;
+        ResetCamera = camera.transform.position;
+        targetOrtho = camera.orthographicSize;
+        camera.eventMask = inputLayerMask;
     }
     private void Update()
     {
@@ -28,17 +32,17 @@ public class CameraDrag : MonoBehaviour
             targetOrtho = Mathf.Clamp(targetOrtho, minOrtho, maxOrtho);
         }
 
-        Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
+        camera.orthographicSize = Mathf.MoveTowards(camera.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
     }
     void LateUpdate()
     {
         if (Input.GetMouseButton(1))
         {
-            Diference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - Camera.main.transform.position;
+            Diference = (camera.ScreenToWorldPoint(Input.mousePosition)) - camera.transform.position;
             if (Drag == false)
             {
                 Drag = true;
-                Origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Origin = camera.ScreenToWorldPoint(Input.mousePosition);
             }
         }
         else
@@ -47,12 +51,12 @@ public class CameraDrag : MonoBehaviour
         }
         if (Drag == true)
         {
-            Camera.main.transform.position = Origin - Diference;
+            camera.transform.position = Origin - Diference;
         }
         //RESET CAMERA TO STARTING POSITION WITH RIGHT CLICK
         if (Input.GetMouseButton(2))
         {
-            Camera.main.transform.position = ResetCamera;
+            camera.transform.position = ResetCamera;
         }
     }
 }
