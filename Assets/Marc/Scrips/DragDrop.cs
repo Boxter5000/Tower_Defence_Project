@@ -78,6 +78,7 @@ public class DragDrop : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, 
             uiController.AddMoney(TowerConst * -1);
             TowerOnMouse.GetComponent<Collider2D>().enabled = true;
             TowerBase towerBase = TowerOnMouse.GetComponent<TowerBase>();
+            towerBase.GetPlacePos();
             towerBase.ManageShooting(true);
             towerBase.ManageRangeVisuals(false);
         }
